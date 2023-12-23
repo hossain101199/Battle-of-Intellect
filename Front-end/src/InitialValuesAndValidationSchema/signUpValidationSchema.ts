@@ -17,6 +17,6 @@ export const signUpValidationSchema = Yup.object({
     .matches(/[^\w]/, "Password must contain at least one symbol")
     .required("Password is required"),
   confirmPassword: Yup.string()
-    .oneOf([Yup.ref("password"), null], "Passwords must match")
+    .oneOf([Yup.ref("password"), undefined], "Passwords must match")
     .required("Confirm Password is required"),
 });
