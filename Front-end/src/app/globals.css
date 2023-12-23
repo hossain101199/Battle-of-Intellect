@@ -1,0 +1,7 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.click-animation {
+  @apply transform active:scale-105 transition-transform;
+}
