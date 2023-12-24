@@ -31,7 +31,7 @@ const InputField: React.FC<InputFieldProps> = ({
 
       <div className="flex rounded-lg p-3 w-full border border-secondary">
         <input
-          className="outline-none border-none w-full text-sm font-medium placeholder:text-slategray"
+          className="outline-none border-none w-full text-sm font-medium placeholder:text-slategray bg-white"
           autoComplete="true"
           {...field}
           {...props}

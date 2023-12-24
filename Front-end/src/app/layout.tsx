@@ -19,13 +19,13 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <Providers>
-      <html lang="en">
-        <body className={inter.className} suppressHydrationWarning={true}>
+    <html lang="en">
+      <body className={inter.className} suppressHydrationWarning={true}>
+        <Providers>
           <MainLayout>{children}</MainLayout>
           <Toaster />
-        </body>
-      </html>
-    </Providers>
+        </Providers>
+      </body>
+    </html>
   );
 }

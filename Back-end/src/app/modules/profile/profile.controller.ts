@@ -10,15 +10,15 @@ const getProfile: RequestHandler = catchAsync(async (req, res) => {
     throw new ApiError(403, 'Forbidden');
   }
 
-  const { id } = req.verifiedUser;
+  const { userId } = req.verifiedUser;
 
-  const result = await profileService.getProfileFromDB(id);
+  const result = await profileService.getProfileFromDB(userId);
 
   if (result === null) {
     sendResponse<IUser>(res, {
       statusCode: 404,
       success: false,
-      message: `Error: User with ID ${id} is not found. Please verify the provided ID and try again`,
+      message: `Error: User with ID ${userId} is not found. Please verify the provided ID and try again`,
       data: result,
     });
   } else {
@@ -36,10 +36,13 @@ const updateProfile: RequestHandler = catchAsync(async (req, res) => {
     throw new ApiError(403, 'Forbidden');
   }
 
-  const { id } = req.verifiedUser;
+  const { userId } = req.verifiedUser;
   const updatedUserData = req.body;
 
-  const result = await profileService.updateProfileInDB(id, updatedUserData);
+  const result = await profileService.updateProfileInDB(
+    userId,
+    updatedUserData
+  );
 
   sendResponse<IUser>(res, {
     statusCode: 200,

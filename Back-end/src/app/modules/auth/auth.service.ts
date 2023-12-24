@@ -1,4 +1,4 @@
-import { User } from '@prisma/client';
+import { User, UserRole } from '@prisma/client';
 import bcrypt from 'bcrypt';
 import jwt, { JwtPayload, Secret } from 'jsonwebtoken';
 import config from '../../../config';
@@ -17,12 +17,12 @@ const createUserInDB = async (payload: User): Promise<IUser> => {
     Number(config.bcrypt_salt_rounds)
   );
 
-  // payload.role = UserRole.ADMIN;
+  payload.role = UserRole.ADMIN;
 
   const createdUser = await prisma.user.create({
     data: payload,
     select: {
-      id: true,
+      userId: true,
       name: true,
       email: true,
       role: true,
@@ -40,7 +40,7 @@ const loginUser = async (payload: ILoginUser): Promise<ILoginUserResponse> => {
   const isUserExist = await prisma.user.findUnique({
     where: { email: email },
     select: {
-      id: true,
+      userId: true,
       name: true,
       role: true,
       password: true,
@@ -49,11 +49,11 @@ const loginUser = async (payload: ILoginUser): Promise<ILoginUserResponse> => {
 
   if (isUserExist) {
     if (await bcrypt.compare(password, isUserExist.password)) {
-      const { id, name, role } = isUserExist;
+      const { userId, name, role } = isUserExist;
 
       const accessToken = jwt.sign(
         {
-          id,
+          userId,
           name,
           role,
         },
@@ -63,7 +63,7 @@ const loginUser = async (payload: ILoginUser): Promise<ILoginUserResponse> => {
 
       const refreshToken = jwt.sign(
         {
-          id,
+          userId,
           name,
           role,
         },
@@ -92,7 +92,7 @@ const changePassword = async (
   const { oldPassword, newPassword } = payload;
 
   const isUserExist = await prisma.user.findUnique({
-    where: { id: user?.id },
+    where: { userId: user?.id },
     select: {
       password: true,
     },
@@ -116,7 +116,7 @@ const changePassword = async (
   );
 
   await prisma.user.update({
-    where: { id: user?.id },
+    where: { userId: user?.id },
     data: {
       password: hashedNewPassword,
     },

@@ -5,10 +5,10 @@ import { IUser } from '../user/user.interface';
 const getProfileFromDB = async (payload: string): Promise<IUser | null> => {
   const result = await prisma.user.findUnique({
     where: {
-      id: payload,
+      userId: payload,
     },
     select: {
-      id: true,
+      userId: true,
       name: true,
       email: true,
       role: true,
@@ -36,13 +36,13 @@ const updateProfileInDB = async (
 
   const result = await prisma.user.update({
     where: {
-      id,
+      userId: id,
     },
 
     data: filteredPayload,
 
     select: {
-      id: true,
+      userId: true,
       name: true,
       email: true,
       role: true,
