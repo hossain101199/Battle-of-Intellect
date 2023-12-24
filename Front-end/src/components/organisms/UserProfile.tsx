@@ -6,7 +6,7 @@ import Spinner from "../atoms/Spinner";
 import UpdateProfile from "../molecules/UpdateProfile";
 
 const UserProfile = () => {
-  const { data: profile, isLoading } = useGetProfileQuery();
+  const { data: profile, isLoading } = useGetProfileQuery({});
   return (
     <Container className="flex justify-center">
       {isLoading ? (

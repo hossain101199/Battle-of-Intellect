@@ -1,20 +1,16 @@
 import { API } from "../../api/apiSlice";
 
-interface ProfileData {
-  name: string;
-  email: string;
-}
-
 const profileAPI = API.injectEndpoints({
   endpoints: (builder) => ({
     getProfile: builder.query({
       query: () => ({
         url: `/profile`,
+        method: "GET",
       }),
       providesTags: ["profileUpdated"],
     }),
 
-    updateProfile: builder.mutation<void, Partial<ProfileData>>({
+    updateProfile: builder.mutation({
       query: (data) => ({
         url: `/profile`,
         method: "PATCH",
