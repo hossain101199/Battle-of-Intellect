@@ -38,14 +38,14 @@ const SignUp = () => {
       }
     } catch (error: any) {
       toast.error("Oops! Something went wrong. Please try again.");
-      throw new Error("An unexpected error occurred:", error);
+      throw Error(error);
     }
   };
   return (
     <Container className="flex justify-center items-center">
       <Card className="mt-[50px] mb-[50px] p-[30px] sm:p-[50px] max-w-md w-full shadow-lg flex flex-col gap-5 border-none">
         <LHeading className="text-center">Sign Up</LHeading>
-        {isError && <Error error={error?.data?.message} />}
+        {isError && <Error error={"Oops! Something went wrong."} />}
         <Formik
           onSubmit={handleSubmit}
           initialValues={signUpInitialValues}
