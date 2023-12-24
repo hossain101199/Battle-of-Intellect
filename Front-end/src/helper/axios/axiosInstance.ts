@@ -1,22 +1,22 @@
 import { getAccessToken } from "@/utils/auth.service";
 import axios, {
   AxiosInstance,
+  AxiosRequestHeaders,
   AxiosResponse,
-  InternalAxiosRequestConfig,
 } from "axios";
 
 const axiosInstance: AxiosInstance = axios.create();
 
 axiosInstance.interceptors.request.use(
-  (config: InternalAxiosRequestConfig) => {
+  (config) => {
     const token = getAccessToken();
 
     if (token) {
       config.headers = {
+        ...config.headers,
         Authorization: `${token}`,
         Accept: "application/json",
-        ...config.headers,
-      };
+      } as AxiosRequestHeaders;
     }
 
     return config;
