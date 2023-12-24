@@ -5,6 +5,7 @@ import React from "react";
 import SParagraph from "./SParagraph";
 
 interface InputFieldProps {
+  title?: string;
   showIcon?: boolean;
   showPassword?: boolean;
   setShowPassword?: (show: boolean) => void;
@@ -12,6 +13,7 @@ interface InputFieldProps {
 }
 
 const InputField: React.FC<InputFieldProps> = ({
+  title = "",
   showIcon = false,
   showPassword,
   setShowPassword = () => {},
@@ -21,12 +23,15 @@ const InputField: React.FC<InputFieldProps> = ({
 
   return (
     <div className="w-full">
-      <SParagraph className="font-bold uppercase mb-3 text-primary">
-        {props?.name}
-      </SParagraph>
-      <div className="flex rounded-lg p-3 w-full bg-accent border border-secondary">
+      {title && (
+        <SParagraph className="font-bold uppercase mb-3 text-primary">
+          {title}
+        </SParagraph>
+      )}
+
+      <div className="flex rounded-lg p-3 w-full border border-secondary">
         <input
-          className="outline-none border-none w-full text-sm font-medium bg-accent placeholder:text-slategray"
+          className="outline-none border-none w-full text-sm font-medium placeholder:text-slategray"
           autoComplete="true"
           {...field}
           {...props}

@@ -27,10 +27,10 @@ const SignInPage = () => {
     }
   };
   return (
-    <>
+    <main>
       <Container className="flex justify-center items-center">
-        <Card className="mt-[50px] mb-[50px] p-[30px] sm:p-[50px] max-w-md w-full shadow-lg flex flex-col gap-5 bg-[#FFF8ED] border-none">
-          <LHeading className="text-center">Sign In</LHeading>
+        <Card className="mt-[50px] mb-[50px] p-[30px] sm:p-[50px] max-w-md w-full shadow-lg flex flex-col gap-5 border-none">
+          <LHeading className="text-center">Sign Up</LHeading>
           <Formik
             onSubmit={handleSubmit}
             initialValues={signUpInitialValues}
@@ -39,10 +39,11 @@ const SignInPage = () => {
             {({ isSubmitting }) => (
               <fieldset disabled={isSubmitting}>
                 <Form className="flex flex-col gap-5">
-                  <InputField name="name" type="text" />
-                  <InputField name="email" type="email" />
+                  <InputField name="name" title="name" type="text" />
+                  <InputField name="email" title="email" type="email" />
                   <InputField
                     name="password"
+                    title="password"
                     type={showPassword ? "text" : "password"}
                     showPassword={showPassword}
                     setShowPassword={setShowPassword}
@@ -50,6 +51,7 @@ const SignInPage = () => {
                   />
                   <InputField
                     name="confirmPassword"
+                    title="confirm Password"
                     type={showPassword ? "text" : "password"}
                     showPassword={showPassword}
                     setShowPassword={setShowPassword}
@@ -70,7 +72,7 @@ const SignInPage = () => {
           </Paragraph>
         </Card>
       </Container>
-    </>
+    </main>
   );
 };
 

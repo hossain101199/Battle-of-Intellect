@@ -1,10 +1,8 @@
 import CategorySelect from "@/components/atoms/CategorySelect";
 import Container from "@/components/atoms/Container";
-import SParagraph from "@/components/atoms/SParagraph";
 import QuizCard from "@/components/molecules/QuizCard";
-import Link from "next/link";
 
-const Home = () => {
+const Quizzes = () => {
   return (
     <main>
       <Container className="flex flex-col gap-5">
@@ -15,17 +13,9 @@ const Home = () => {
           <QuizCard />
           <QuizCard />
         </div>
-
-        <div className="flex justify-end">
-          <Link href="/quizzes">
-            <SParagraph className="font-bold text-primary">
-              See more &#x290D;
-            </SParagraph>
-          </Link>
-        </div>
       </Container>
     </main>
   );
 };
 
-export default Home;
+export default Quizzes;

@@ -44,7 +44,7 @@ const AutNav: React.FC<AutNavProps> = () => {
         }`}
       >
         <Link href="/profile" className="flex justify-center">
-          <XLParagraph className="font-bold text-primary"> Profile</XLParagraph>
+          <XLParagraph className="font-bold text-primary">Profile</XLParagraph>
         </Link>
       </Card>
     </div>
