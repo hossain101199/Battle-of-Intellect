@@ -10,6 +10,6 @@ export const changePasswordValidationSchema = Yup.object({
     .matches(/[^\w]/, "Password must contain at least one symbol")
     .required("New password is required"),
   confirmPassword: Yup.string()
-    .oneOf([Yup.ref("newPassword"), null], "New passwords must match")
+    .oneOf([Yup.ref("newPassword"), undefined], "New passwords must match")
     .required("Confirm new password is required"),
 });

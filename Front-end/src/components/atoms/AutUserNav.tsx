@@ -7,7 +7,7 @@ import { useRouter } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
 import toast from "react-hot-toast";
 import Card from "./Card";
-import LParagraph from "./LParagraph";
+import Paragraph from "./Paragraph";
 
 const AutUserNav = () => {
   const { name } = useAppSelector((state) => state.auth);
@@ -59,16 +59,16 @@ const AutUserNav = () => {
       </button>
 
       <Card
-        className={`py-5 absolute z-50 end-0 top-[53px] flex flex-col gap-4 justify-start w-28 shadow-lg bg-white ${
+        className={`py-5 absolute z-50 end-0 top-[53px] flex flex-col gap-4 justify-start w-28 shadow-lg backdrop-blur-md ${
           isProfileOn ? "block" : "hidden"
         }`}
       >
         <Link href="/profile" className="px-2">
-          <LParagraph className="font-bold text-primary">Profile</LParagraph>
+          <Paragraph className="font-bold text-primary">Profile</Paragraph>
         </Link>
         <hr />
         <button onClick={handleSignOut} className="w-fit px-2">
-          <LParagraph className="font-bold text-warning">Sign Out</LParagraph>
+          <Paragraph className="font-bold text-warning">Sign Out</Paragraph>
         </button>
       </Card>
     </div>

@@ -3,6 +3,7 @@
 import { useGetProfileQuery } from "@/redux/features/profile/profileAPI";
 import Container from "../atoms/Container";
 import Spinner from "../atoms/Spinner";
+import ChangePassword from "../molecules/ChangePassword";
 import UpdateProfile from "../molecules/UpdateProfile";
 
 const UserProfile = () => {
@@ -12,9 +13,9 @@ const UserProfile = () => {
       {isLoading ? (
         <Spinner />
       ) : (
-        <div className="flex flex-col gap-5 w-full md:w-[672px]">
+        <div className="flex flex-col gap-5  md:w-[672px]">
           <UpdateProfile profile={profile} />
-          {/* <ChangePassword /> */}
+          <ChangePassword />
         </div>
       )}
     </Container>

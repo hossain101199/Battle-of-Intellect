@@ -1,6 +1,8 @@
 import { updateProfileValidationSchema } from "@/InitialValuesAndValidationSchema/updateProfileValidationSchema";
 import EditIcon from "@/assets/svgs/EditIcon";
+import { setLoggedInUserInfo } from "@/redux/features/auth/authSlice";
 import { useUpdateProfileMutation } from "@/redux/features/profile/profileAPI";
+import { useAppDispatch } from "@/redux/hooks";
 import { Form, Formik } from "formik";
 import { useState } from "react";
 import toast from "react-hot-toast";
@@ -19,6 +21,8 @@ interface UpdateProfileProps {
 
 const UpdateProfile: React.FC<UpdateProfileProps> = ({ profile }) => {
   const [isEdit, setIsEdit] = useState(false);
+
+  const dispatch = useAppDispatch();
 
   const initialValues = {
     name: profile?.data.name,
@@ -44,6 +48,11 @@ const UpdateProfile: React.FC<UpdateProfileProps> = ({ profile }) => {
 
       if (result?.statusCode == 200) {
         toast.success("Profile updated successfully!");
+        dispatch(
+          setLoggedInUserInfo({
+            name: result?.data?.name,
+          })
+        );
         setSubmitting(false);
         setIsEdit(!isEdit);
       }
@@ -59,17 +68,24 @@ const UpdateProfile: React.FC<UpdateProfileProps> = ({ profile }) => {
   };
 
   return (
-    // {isError && <Error error={"Oops! Something went wrong."} />}
     <div className="flex flex-col gap-5">
       <div className="flex items-center justify-between">
-        <p className="click-animation font-bold text-4xl bg-primary text-accent border border-secondary rounded-full w-20 h-20 flex justify-center items-center uppercase">
-          M
+        <p className="click-animation font-bold text-6xl bg-primary text-accent border border-secondary rounded-full w-20 h-20 flex justify-center items-center uppercase">
+          {profile?.data.name?.slice(0, 1)}
         </p>
         <button onClick={handleEdit}>
           <EditIcon />
         </button>
       </div>
-
+      {isError && (
+        <Error
+          error={
+            (error as any)?.data?.message
+              ? (error as any)?.data?.message
+              : "Oops! Something went wrong."
+          }
+        />
+      )}
       <Formik
         onSubmit={handleSubmit}
         initialValues={initialValues}
@@ -78,8 +94,18 @@ const UpdateProfile: React.FC<UpdateProfileProps> = ({ profile }) => {
         {({ isSubmitting }) => (
           <fieldset disabled={isSubmitting || isLoading}>
             <Form className="flex flex-col gap-5">
-              <InputField name="name" type="text" disabled={!isEdit} />
-              <InputField name="email" type="email" disabled={!isEdit} />
+              <InputField
+                title="name"
+                name="name"
+                type="text"
+                disabled={!isEdit}
+              />
+              <InputField
+                title="email"
+                name="email"
+                type="email"
+                disabled={!isEdit}
+              />
               {isEdit && (
                 <div className="flex justify-end">
                   <SpinnerButton

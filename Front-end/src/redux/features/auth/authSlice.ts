@@ -1,9 +1,9 @@
 import { PayloadAction, createSlice } from "@reduxjs/toolkit";
 
 interface AuthState {
-  accessToken: string | null;
-  name: string | null;
-  role: string | null;
+  accessToken?: string | null;
+  name?: string | null;
+  role?: string | null;
 }
 
 const initialState: AuthState = {
@@ -17,9 +17,15 @@ export const authSlice = createSlice({
   initialState,
   reducers: {
     setLoggedInUserInfo: (state, action: PayloadAction<AuthState>) => {
-      state.accessToken = action.payload.accessToken;
-      state.name = action.payload.name;
-      state.role = action.payload.role;
+      if (action.payload.accessToken !== undefined) {
+        state.accessToken = action.payload.accessToken;
+      }
+      if (action.payload.name !== undefined) {
+        state.name = action.payload.name;
+      }
+      if (action.payload.role !== undefined) {
+        state.role = action.payload.role;
+      }
     },
   },
 });

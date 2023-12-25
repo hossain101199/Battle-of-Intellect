@@ -92,7 +92,7 @@ const changePassword = async (
   const { oldPassword, newPassword } = payload;
 
   const isUserExist = await prisma.user.findUnique({
-    where: { userId: user?.id },
+    where: { userId: user?.userId },
     select: {
       password: true,
     },
@@ -116,7 +116,7 @@ const changePassword = async (
   );
 
   await prisma.user.update({
-    where: { userId: user?.id },
+    where: { userId: user?.userId },
     data: {
       password: hashedNewPassword,
     },

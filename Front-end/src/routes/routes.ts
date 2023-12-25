@@ -1,1 +1,1 @@
-export const excludeFooterPaths = ["/profile"];
+export const excludeFooterPaths = ["/profile", "/quizzes"];

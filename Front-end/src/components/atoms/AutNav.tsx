@@ -9,7 +9,9 @@ const AutNav: React.FC<AutNavProps> = () => {
   return (
     <div className="flex gap-3">
       {role === "ADMIN" && <NavLink href="dashboard" title="Dashboard" />}
+
       <NavLink href="leader-board" title="Leader Board" />
+
       <AutUserNav />
     </div>
   );
