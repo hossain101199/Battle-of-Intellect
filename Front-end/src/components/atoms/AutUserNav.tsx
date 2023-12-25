@@ -1,4 +1,5 @@
 "use client";
+import { API } from "@/redux/api/apiSlice";
 import { setLoggedInUserInfo } from "@/redux/features/auth/authSlice";
 import { useAppDispatch, useAppSelector } from "@/redux/hooks";
 import { removeAccessToken, removeUserInfo } from "@/utils/auth.service";
@@ -43,6 +44,7 @@ const AutUserNav = () => {
         role: null,
       })
     );
+    dispatch(API.util.resetApiState());
     removeUserInfo();
     removeAccessToken();
     toast.success("Successfully signed out");

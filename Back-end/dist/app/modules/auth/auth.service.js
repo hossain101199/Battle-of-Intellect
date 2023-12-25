@@ -13,7 +13,6 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.authService = void 0;
-const client_1 = require("@prisma/client");
 const bcrypt_1 = __importDefault(require("bcrypt"));
 const jsonwebtoken_1 = __importDefault(require("jsonwebtoken"));
 const config_1 = __importDefault(require("../../../config"));
@@ -21,7 +20,7 @@ const ApiError_1 = __importDefault(require("../../../errors/ApiError"));
 const prisma_1 = __importDefault(require("../../../shared/prisma"));
 const createUserInDB = (payload) => __awaiter(void 0, void 0, void 0, function* () {
     payload.password = yield bcrypt_1.default.hash(payload.password, Number(config_1.default.bcrypt_salt_rounds));
-    payload.role = client_1.UserRole.ADMIN;
+    // payload.role = UserRole.ADMIN;
     const createdUser = yield prisma_1.default.user.create({
         data: payload,
         select: {

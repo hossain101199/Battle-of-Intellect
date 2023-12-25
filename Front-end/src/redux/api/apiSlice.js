@@ -11,5 +11,5 @@ export const API = createApi({
 
   endpoints: () => ({}),
 
-  tagTypes: ["profileUpdated"],
+  tagTypes: ["profileUpdated", "category"],
 });

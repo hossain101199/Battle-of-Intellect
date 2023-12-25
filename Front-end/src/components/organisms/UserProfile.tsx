@@ -13,7 +13,7 @@ const UserProfile = () => {
       {isLoading ? (
         <Spinner />
       ) : (
-        <div className="flex flex-col gap-5  md:w-[672px]">
+        <div className="flex flex-col gap-5 min-w-full md:min-w-[672px]">
           <UpdateProfile profile={profile} />
           <ChangePassword />
         </div>
